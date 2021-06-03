@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <h4 class="text-center p-3 text-white">Top-rated Movies</h4>
+        <div class="row text-center">
+            <div class="col-md-3 p-2" v-if="commentIndex < con.length" v-for="commentIndex in commentsToShow">
+                <div class="card">
+                    <div class="card-body">
+                        <img v-bind:src="(`https://www.themoviedb.org/t/p/w220_and_h330_face/${con[commentIndex].poster_path}`)"
+                            width="120" height="120">
+                        <h5 class="pt-4">{{con[commentIndex].original_title}}</h5>
+                        <p class="pt-4">{{con[commentIndex].overview |truncate(100, '...')}}</p>
+                        <div class="row pt-4">
+                            <div class="col-md-6">
+                                Date <br><strong>{{con[commentIndex].release_date}}</strong></div>
+                            <div class="col-md-6">
+                                Review <br><strong>{{con[commentIndex].vote_average}}</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div v-if="commentsToShow < con.length || con.length > commentsToShow" class="text-center mt-3">
+            <button @click="commentsToShow += 4" class="btn btn-danger">Load More</button>
+        </div>
+    </div>
+    <hr>
+    <div id="app2" class="container-fluid">
+        <h4 class="text-center pt-5 text-white">Upcoming Movies</h4>
+        <div class="row text-center">
+            <div class="col-md-3 p-2" v-if="commentIndex < con.length" v-for="commentIndex in commentsToShow">
+                <div class="card">
+                    <div class="card-body">
+                        <img v-bind:src="(`https://www.themoviedb.org/t/p/w220_and_h330_face/${con[commentIndex].poster_path}`)"
+                            width="120" height="120">
+                        <h5 class="pt-4">{{con[commentIndex].original_title}}</h5>
+                        <p class="pt-4">{{con[commentIndex].overview |truncate(100, '...')}}</p>
+                        <div class="row pt-4">
+                            <div class="col-md-6">
+                                Date <br><strong>{{con[commentIndex].release_date}}</strong></div>
+                            <div class="col-md-6">
+                                Review <br><strong>{{con[commentIndex].vote_average}}</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div v-if="commentsToShow < con.length || con.length > commentsToShow" class="text-center mt-3">
+            <button @click="commentsToShow += 4" class="btn btn-danger">Load More</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
